@@ -1,8 +1,9 @@
 package br.com.blendtecnologia.msusers.domain.repository;
 
-import br.com.blendtecnologia.msusers.domain.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import br.com.blendtecnologia.msusers.domain.entity.User;
 
 import java.util.Optional;
 

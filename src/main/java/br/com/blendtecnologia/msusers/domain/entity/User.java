@@ -1,4 +1,4 @@
-package br.com.blendtecnologia.msusers.domain.model;
+package br.com.blendtecnologia.msusers.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

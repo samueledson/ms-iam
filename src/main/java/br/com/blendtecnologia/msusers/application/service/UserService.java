@@ -1,13 +1,12 @@
-package br.com.blendtecnologia.msusers.application;
+package br.com.blendtecnologia.msusers.application.service;
 
-import br.com.blendtecnologia.msusers.domain.model.User;
 import br.com.blendtecnologia.msusers.presentation.dto.UserDTO;
+import br.com.blendtecnologia.msusers.domain.entity.User;
 import br.com.blendtecnologia.msusers.domain.service.UserDomainService;
 import lombok.RequiredArgsConstructor;
 
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -58,11 +57,9 @@ public class UserService {
         User user = userDomainService.getUserById(id);
         if(user != null) {
 
-            //BeanUtils.copyProperties(user, userDTO, "id");
             modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
             modelMapper.map(userDTO, user);
 
-            //user.setId(id);
             user.setUpdatedAt(LocalDateTime.now(ZoneId.of("UTC")));
             if (user.getPassword() != null) {
                 user.setPassword(passwordEncoder.encode(userDTO.getPassword()));

@@ -1,6 +1,6 @@
 package br.com.blendtecnologia.msusers.domain.service;
 
-import br.com.blendtecnologia.msusers.domain.model.User;
+import br.com.blendtecnologia.msusers.domain.entity.User;
 import br.com.blendtecnologia.msusers.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 

@@ -1,7 +1,7 @@
 package br.com.blendtecnologia.msusers.presentation.controller;
 
+import br.com.blendtecnologia.msusers.application.service.UserService;
 import br.com.blendtecnologia.msusers.presentation.dto.UserDTO;
-import br.com.blendtecnologia.msusers.application.UserService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
