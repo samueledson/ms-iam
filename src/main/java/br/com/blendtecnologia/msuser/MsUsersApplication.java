@@ -1,4 +1,4 @@
-package br.com.blendtecnologia.msusers;
+package br.com.blendtecnologia.msuser;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

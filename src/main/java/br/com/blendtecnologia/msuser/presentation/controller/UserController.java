@@ -1,12 +1,13 @@
-package br.com.blendtecnologia.msusers.presentation.controller;
+package br.com.blendtecnologia.msuser.presentation.controller;
 
-import br.com.blendtecnologia.msusers.application.service.UserService;
-import br.com.blendtecnologia.msusers.presentation.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import br.com.blendtecnologia.msuser.application.service.UserService;
+import br.com.blendtecnologia.msuser.presentation.dto.UserDTO;
 
 @RestController
 @RequestMapping("users")
@@ -23,7 +24,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        if (userService.isUserExists(userDTO.getUsername())) {
+        if (userService.isUserExists(userDTO.getCpf())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         UserDTO savedUserDTO = userService.createUser(userDTO);
@@ -52,8 +53,11 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return ResponseEntity.noContent().build();
+        boolean isDeleted = userService.deleteUser(id);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

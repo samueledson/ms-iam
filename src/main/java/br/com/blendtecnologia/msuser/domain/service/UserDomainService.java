@@ -1,13 +1,16 @@
-package br.com.blendtecnologia.msusers.domain.service;
+package br.com.blendtecnologia.msuser.domain.service;
 
-import br.com.blendtecnologia.msusers.domain.entity.User;
-import br.com.blendtecnologia.msusers.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import br.com.blendtecnologia.msuser.domain.entity.User;
+import br.com.blendtecnologia.msuser.domain.repository.UserRepository;
 
 @Service
 @Transactional
@@ -18,8 +21,7 @@ public class UserDomainService {
 
     @Transactional
     public List<User> getAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users;
+        return userRepository.findAll();
     }
 
     @Transactional
@@ -38,13 +40,19 @@ public class UserDomainService {
     }
 
     @Transactional
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    public boolean deleteUser(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if(user != null) {
+            user.setDeletedAt(LocalDateTime.now(ZoneId.of("UTC")));
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 
     @Transactional
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElse(null);
+    public User findByCpf(String cpf) {
+        return userRepository.findByCpf(cpf).orElse(null);
     }
 
 }

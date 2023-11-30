@@ -1,4 +1,4 @@
-package br.com.blendtecnologia.msusers.presentation.dto;
+package br.com.blendtecnologia.msuser.presentation.dto;
 
 import org.springframework.data.annotation.ReadOnlyProperty;
 
@@ -17,8 +17,13 @@ public class UserDTO {
     private Long id;
 
     @NotBlank
-    @Size(min = 3, max = 20)
-    private String username;
+    @Size(min = 11, max = 11)
+    private String cpf;
+
+    @NotBlank
+    @Email
+    @Size(max = 255)
+    private String email;
 
     @NotBlank
     @Size(min = 6, max = 20)
@@ -26,8 +31,14 @@ public class UserDTO {
     private String password;
 
     @NotBlank
-    @Email
     @Size(max = 255)
-    private String email;
+    private String name;
+
+    @NotBlank
+    @Size(min = 11, max = 11)
+    private String cellphone;
+
+    @JsonProperty("status_id")
+    private Long statusId = 1L;
 
 }

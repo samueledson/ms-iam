@@ -1,6 +1,5 @@
-package br.com.blendtecnologia.msusers.infrastructure;
+package br.com.blendtecnologia.msuser.infrastructure;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -15,15 +14,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import lombok.RequiredArgsConstructor;
+
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Value("${spring.security.user.name}")
-    private String username;
-
-    @Value("${spring.security.user.password}")
-    private String password;
+    private final ApplicationProperties applicationProperties;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -39,8 +37,8 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService inMemoryUserDetailsManager() {
 
-        UserDetails user = User.withUsername(username)
-            .password(passwordEncoder().encode(password))
+        UserDetails user = User.withUsername(applicationProperties.springSecurityUserName)
+            .password(passwordEncoder().encode(applicationProperties.springSecurityUserPassword))
             .roles("USER")
             .build();
         return new InMemoryUserDetailsManager(user);

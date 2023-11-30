@@ -1,14 +1,15 @@
-package br.com.blendtecnologia.msusers.application.service;
+package br.com.blendtecnologia.msuser.application.service;
 
-import br.com.blendtecnologia.msusers.presentation.dto.UserDTO;
-import br.com.blendtecnologia.msusers.domain.entity.User;
-import br.com.blendtecnologia.msusers.domain.service.UserDomainService;
 import lombok.RequiredArgsConstructor;
 
 import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import br.com.blendtecnologia.msuser.domain.entity.User;
+import br.com.blendtecnologia.msuser.domain.service.UserDomainService;
+import br.com.blendtecnologia.msuser.presentation.dto.UserDTO;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -25,7 +26,7 @@ public class UserService {
 
     public List<UserDTO> getAllUsers() {
         List<User> users = userDomainService.getAllUsers();
-        List<UserDTO> userDTOs = new ArrayList<UserDTO>();
+        List<UserDTO> userDTOs = new ArrayList<>();
         
         for (User user : users) {
             UserDTO userDTO = modelMapper.map(user, UserDTO.class);
@@ -73,20 +74,20 @@ public class UserService {
         return null;
     }
 
-    public void deleteUser(Long id) {
-        userDomainService.deleteUser(id);
+    public boolean deleteUser(Long id) {
+        return userDomainService.deleteUser(id);
     }
 
-    public UserDTO findByUsername(String username) {
-        User user = userDomainService.findByUsername(username);
+    public UserDTO findByCpf(String cpf) {
+        User user = userDomainService.findByCpf(cpf);
         if (user != null) {
             return modelMapper.map(user, UserDTO.class);
         }
         return null;
     }
 
-    public boolean isUserExists(String username) {
-        User user = userDomainService.findByUsername(username);
+    public boolean isUserExists(String cpf) {
+        User user = userDomainService.findByCpf(cpf);
         return user != null;
     }
 
