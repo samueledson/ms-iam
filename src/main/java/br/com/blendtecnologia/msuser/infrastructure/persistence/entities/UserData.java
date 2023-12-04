@@ -2,6 +2,8 @@ package br.com.blendtecnologia.msuser.infrastructure.persistence.entities;
 
 import static br.com.blendtecnologia.msuser.infrastructure.persistence.utils.IdConverter.convertId;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import br.com.blendtecnologia.msuser.core.domain.entities.User;
 import br.com.blendtecnologia.msuser.core.domain.entities.UserStatus;
 import br.com.blendtecnologia.msuser.core.domain.valueobjects.Identity;
@@ -26,6 +28,7 @@ import lombok.ToString;
 @ToString(of = {"status", "cpf", "email", "name", "cellphone"})
 @Entity(name = "user")
 @Table(name = "user")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserData {
     
     @Id
