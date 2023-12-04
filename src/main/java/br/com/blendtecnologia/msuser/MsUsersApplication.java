@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import jakarta.annotation.PostConstruct;
 
-@SpringBootApplication(scanBasePackages = {"br.com.blendtecnologia.msuser.presenter", "br.com.blendtecnologia.msuser.infrastructure"})
+@SpringBootApplication(scanBasePackages = {"br.com.blendtecnologia.msuser.ui", "br.com.blendtecnologia.msuser.infrastructure"})
 public class MsUsersApplication {
 
     @PostConstruct

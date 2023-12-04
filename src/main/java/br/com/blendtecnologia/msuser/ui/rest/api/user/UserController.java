@@ -18,7 +18,7 @@ import jakarta.validation.Valid;
 public interface UserController {
 
     @PostMapping
-    @PreAuthorize("hasRole('MS_AUTH')")
+    //@PreAuthorize("hasRole('MS_AUTH')")
     CompletableFuture<ResponseEntity<ApiResponse>> create(HttpServletRequest httpServletRequest,
             @RequestBody @Valid UserRequest request);
 
