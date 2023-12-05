@@ -1,5 +1,8 @@
 package br.com.blendtecnologia.msuser.core.domain.entities;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import br.com.blendtecnologia.msuser.core.domain.valueobjects.Identity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,17 +18,23 @@ public class User {
     private String email;
     private String password;
     private String name;
-    private String cellphone;    
+    private String cellphone;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime deletedAt;
 
     public static User newInstance(String cpf, String email, String password, String name, String cellphone) {
         return new User(
             Identity.nothing(),
-            UserStatus.BLOCKED,
+            UserStatus.ACTIVE,
             cpf,
             email,
             password,
             name,
-            cellphone
+            cellphone,
+            null,
+            null,
+            null
         );
     }
 }

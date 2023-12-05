@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 import br.com.blendtecnologia.msuser.core.domain.repositories.UserRepository;
 import br.com.blendtecnologia.msuser.core.domain.usecases.user.CreateUserUseCase;
+import br.com.blendtecnologia.msuser.core.domain.usecases.user.GetUserUseCase;
 
 @Configuration
 public class Module {
@@ -18,6 +19,11 @@ public class Module {
     @Bean
     public CreateUserUseCase createUserUseCase(UserRepository repository) {
         return new CreateUserUseCase(repository);
+    }
+
+    @Bean
+    public GetUserUseCase getUserUseCase(UserRepository repository) {
+        return new GetUserUseCase(repository);
     }
 
 }

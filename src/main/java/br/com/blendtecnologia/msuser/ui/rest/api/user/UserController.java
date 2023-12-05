@@ -4,6 +4,8 @@ import java.util.concurrent.CompletableFuture;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +20,12 @@ import jakarta.validation.Valid;
 public interface UserController {
 
     @PostMapping
-    //@PreAuthorize("hasRole('MS_AUTH')")
+    @PreAuthorize("hasRole('MS_AUTH')")
     CompletableFuture<ResponseEntity<ApiResponse>> create(HttpServletRequest httpServletRequest,
             @RequestBody @Valid UserRequest request);
+
+    @GetMapping("/{id}")
+    @PreAuthorize("hasRole('MS_AUTH')")
+    CompletableFuture<UserResponse> getById(@PathVariable Long id);
 
 }
