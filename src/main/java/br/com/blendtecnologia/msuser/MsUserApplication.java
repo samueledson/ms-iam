@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication(scanBasePackages = {"br.com.blendtecnologia.msuser.ui", "br.com.blendtecnologia.msuser.infrastructure"})
-public class MsUsersApplication {
+public class MsUserApplication {
 
     @PostConstruct
     void init() {
@@ -16,7 +16,7 @@ public class MsUsersApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(MsUsersApplication.class, args);
+        SpringApplication.run(MsUserApplication.class, args);
     }
 
 }

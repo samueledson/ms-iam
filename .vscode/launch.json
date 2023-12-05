@@ -2,10 +2,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-MsUsersApplication<ms-users>",
+            "name": "Spring Boot-MsUserApplication<ms-users>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "br.com.blendtecnologia.msuser.MsUsersApplication",
+            "mainClass": "br.com.blendtecnologia.msuser.MsUserApplication",
             "projectName": "ms-users",
             "args": "",
             "envFile": "${workspaceFolder}/.env"

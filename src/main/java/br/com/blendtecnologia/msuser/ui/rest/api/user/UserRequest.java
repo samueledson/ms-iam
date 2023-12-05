@@ -2,10 +2,12 @@ package br.com.blendtecnologia.msuser.ui.rest.api.user;
 
 import br.com.blendtecnologia.msuser.core.domain.usecases.user.CreateUserUseCase;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 
 @Value
+@AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class UserRequest {
 
