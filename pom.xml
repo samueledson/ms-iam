@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com.blendtecnologia</groupId>
-    <artifactId>ms-user</artifactId>
+    <artifactId>ms-iam</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ms-user</name>
+    <name>ms-iam</name>
     <description>Microservice to manager Users, Permissions and Authentication</description>
     <properties>
         <java.version>17</java.version>
@@ -103,6 +103,12 @@
             <artifactId>javafaker</artifactId>
             <version>0.15</version>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -118,6 +124,25 @@
                         </exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.11</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

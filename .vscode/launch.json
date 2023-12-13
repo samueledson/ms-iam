@@ -2,11 +2,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-MsUserApplication<ms-users>",
+            "name": "Spring Boot-IamApplication<ms-iam>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "br.com.blendtecnologia.msuser.MsUserApplication",
-            "projectName": "ms-users",
+            "mainClass": "br.com.blendtecnologia.iam.IamApplication",
+            "projectName": "ms-iam",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
