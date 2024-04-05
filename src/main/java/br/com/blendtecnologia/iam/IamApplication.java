@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import jakarta.annotation.PostConstruct;
 
-//@SpringBootApplication(scanBasePackages = {"br.com.blendtecnologia.iam.ui", "br.com.blendtecnologia.iam.infrastructure"})
 @SpringBootApplication
 public class IamApplication {
 
