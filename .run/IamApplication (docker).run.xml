@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="IamApplication (docker)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <module name="ms-iam" />
+    <projectPathOnTarget name="projectPathOnTarget" value="/opt/ms-iam" />
+    <target name="ms-iam" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="br.com.blendtecnologia.iam.IamApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
