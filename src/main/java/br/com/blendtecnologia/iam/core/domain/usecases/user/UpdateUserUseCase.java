@@ -1,18 +1,16 @@
 package br.com.blendtecnologia.iam.core.domain.usecases.user;
 
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-
-import br.com.blendtecnologia.iam.core.domain.usecases.UseCaseExecutor;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import br.com.blendtecnologia.iam.core.domain.entities.User;
 import br.com.blendtecnologia.iam.core.domain.repositories.UserRepository;
 import br.com.blendtecnologia.iam.core.domain.usecases.UseCase;
+import br.com.blendtecnologia.iam.core.domain.usecases.UseCaseExecutor;
 import br.com.blendtecnologia.iam.core.domain.valueobjects.Identity;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +24,7 @@ public class UpdateUserUseCase implements UseCase<UpdateUserUseCase.InputValues,
     @Override
     public OutputValues execute(InputValues input) {
 
-        final Identity id = input.getId();
+        final Identity id = input.id();
 
         CompletableFuture<User> userCompletableFuture = useCaseExecutor.execute(
                 getUserUseCase,
@@ -35,28 +33,21 @@ public class UpdateUserUseCase implements UseCase<UpdateUserUseCase.InputValues,
 
         User user = userCompletableFuture.join();
 
-        input.getCpf().ifPresent(user::setCpf);
-        input.getEmail().ifPresent(user::setEmail);
-        input.getName().ifPresent(user::setName);
-        input.getCellphone().ifPresent(user::setCellphone);
+        input.cpf().ifPresent(user::setCpf);
+        input.email().ifPresent(user::setEmail);
+        input.name().ifPresent(user::setName);
+        input.cellphone().ifPresent(user::setCellphone);
 
-        input.getPassword().ifPresent(password ->
+        input.password().ifPresent(password ->
                 user.setPassword(passwordEncoder.encode(password))
         );
 
         return new OutputValues(userRepository.save(user));
     }
 
-    @Value
-    public static class InputValues implements UseCase.InputValues {
-        private final Identity id;
-        private final Optional<String> cpf;
-        private final Optional<String> email;
-        private final Optional<String> password;
-        private final Optional<String> name;
-        private final Optional<String> cellphone;
-    }
+    public record InputValues(Identity id, Optional<String> cpf, Optional<String> email, Optional<String> password,
+                              Optional<String> name, Optional<String> cellphone) implements UseCase.InputValues {}
 
     public record OutputValues(User user) implements UseCase.OutputValues {}
-    
+
 }
