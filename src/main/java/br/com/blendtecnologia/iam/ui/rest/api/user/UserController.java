@@ -16,25 +16,25 @@ import jakarta.validation.Valid;
 public interface UserController {
 
     @GetMapping
-    @PreAuthorize("hasRole('MS_AUTH')")
+    @PreAuthorize("hasRole('MS_IAM')")
     CompletableFuture<List<UserResponse>> getAll();
 
     @PostMapping
-    @PreAuthorize("hasRole('MS_AUTH')")
+    @PreAuthorize("hasRole('MS_IAM')")
     CompletableFuture<ResponseEntity<ApiResponse>> create(HttpServletRequest httpServletRequest,
             @RequestBody @Valid UserRequest userRequest);
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('MS_AUTH')")
+    @PreAuthorize("hasRole('MS_IAM')")
     CompletableFuture<UserResponse> getById(@PathVariable Long id);
 
     @PatchMapping("/{id}")
-    @PreAuthorize("hasRole('MS_AUTH')")
+    @PreAuthorize("hasRole('MS_IAM')")
     CompletableFuture<UserResponse> update(HttpServletRequest httpServletRequest,
                                            @PathVariable Long id, @RequestBody @Valid UpdateUserRequest updateUserRequest);
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('MS_AUTH')")
+    @PreAuthorize("hasRole('MS_IAM')")
     CompletableFuture<ResponseEntity<ApiResponse>> delete(@PathVariable Long id);
 
 }
