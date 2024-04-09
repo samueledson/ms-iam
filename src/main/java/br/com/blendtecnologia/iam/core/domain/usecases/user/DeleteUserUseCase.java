@@ -14,8 +14,8 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class DeleteUserUseCase implements UseCase<DeleteUserUseCase.InputValues, DeleteUserUseCase.OutputValues>{
 
-    private final GetUserUseCase getUserUseCase;
     private final UseCaseExecutor useCaseExecutor;
+    private final GetUserUseCase getUserUseCase;
     private final UserRepository userRepository;
 
     @Override

@@ -1,9 +1,9 @@
 package br.com.blendtecnologia.iam.core.domain.usecases;
 
+import org.springframework.stereotype.Service;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
-
-import org.springframework.stereotype.Service;
 
 @Service
 public class UseCaseExecutorImpl implements UseCaseExecutor {

@@ -4,29 +4,29 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+
 @Component
 @PropertySource("classpath:application.properties")
 public class ApplicationProperties {
 
-    @Value("${spring.security.user.name}")
-    public String springSecurityUserName;
-
-    @Value("${spring.security.user.password}")
-    public String springSecurityUserPassword;
-
-    @Value("${app.name}")
+    @Value("${spring.application.name}")
     public String appName;
 
-    @Value("${app.jwt.secret_key}")
-    public String appJwtSecretKey;
+    @Value("${app.security.jwt.seconds-to-expire}")
+    public long appSecurityJwtSecondsToExpire;
 
-    @Value("${app.jwt.expiration_time}")
-    public long appJwtExpirationTime;
-
-    @Value("${app.jwt.refresh_expiration_time}")
-    public long appJwtRefreshExpirationTime;
+    @Value("${app.security.jwt.refresh.seconds-to-expire}")
+    public long appSecurityJwtRefreshSecondsToExpire;
 
     @Value("${app.redis.key_prefix}")
     public String appRedisKeyPrefix;
+
+    @Value("${app.security.jwt.public-key}")
+    public RSAPublicKey appSecurityJwtPublicKey;
+
+    @Value("${app.security.jwt.private-key}")
+    public RSAPrivateKey appSecurityJwtPrivateKey;
     
 }

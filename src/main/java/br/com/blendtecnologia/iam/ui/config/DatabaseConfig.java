@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan(basePackages = "br.com.blendtecnologia.iam.infrastructure.persistence.entities")
 @EnableJpaRepositories(basePackages = "br.com.blendtecnologia.iam.infrastructure.persistence.repositories")
 public class DatabaseConfig {
-    
 }

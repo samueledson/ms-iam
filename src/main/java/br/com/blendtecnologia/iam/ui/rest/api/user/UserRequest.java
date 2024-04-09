@@ -11,18 +11,18 @@ import lombok.Value;
 public class UserRequest {
 
     @NotNull
-    private final String cpf;
+    String cpf;
 
     @NotNull
-    private final String email;
+    String email;
 
     @NotNull
-    private final String password;
+    String password;
 
     @NotNull
-    private final String name;
+    String name;
 
     @NotNull
-    private final String cellphone;
+    String cellphone;
 
 }

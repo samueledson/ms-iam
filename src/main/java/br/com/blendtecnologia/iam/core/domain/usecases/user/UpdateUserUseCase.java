@@ -16,9 +16,9 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class UpdateUserUseCase implements UseCase<UpdateUserUseCase.InputValues, UpdateUserUseCase.OutputValues> {
 
+    private final UseCaseExecutor useCaseExecutor;
     private final GetUserUseCase getUserUseCase;
     private final PasswordEncoder passwordEncoder;
-    private final UseCaseExecutor useCaseExecutor;
     private final UserRepository userRepository;
 
     @Override

@@ -1,19 +1,18 @@
 package br.com.blendtecnologia.iam.ui.rest.api.user;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
-
-import br.com.blendtecnologia.iam.core.domain.usecases.user.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import br.com.blendtecnologia.iam.core.domain.usecases.UseCaseExecutor;
+import br.com.blendtecnologia.iam.core.domain.usecases.user.*;
 import br.com.blendtecnologia.iam.core.domain.valueobjects.Identity;
 import br.com.blendtecnologia.iam.ui.rest.api.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,7 +42,8 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public CompletableFuture<ResponseEntity<ApiResponse>> create(HttpServletRequest httpServletRequest, @Valid UserRequest userRequest) {
+    public CompletableFuture<ResponseEntity<ApiResponse>> create(HttpServletRequest httpServletRequest,
+                                                                 @Valid UserRequest userRequest) {
 
         return useCaseExecutor.execute(
             createUserUseCase,
@@ -63,8 +63,8 @@ public class UserControllerImpl implements UserController {
     }
 
     @Override
-    public CompletableFuture<UserResponse> update(HttpServletRequest httpServletRequest,
-                                                  @PathVariable Long id, @Valid UpdateUserRequest updateUserRequest) {
+    public CompletableFuture<UserResponse> update(HttpServletRequest httpServletRequest, @PathVariable Long id,
+                                                  @Valid UpdateUserRequest updateUserRequest) {
         return useCaseExecutor.execute(
             updateUserUseCase,
             updateUserUseCaseInputMapper.map(id, updateUserRequest),

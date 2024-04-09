@@ -1,22 +1,23 @@
 package br.com.blendtecnologia.iam.core.domain.repositories;
 
-import java.util.List;
-import java.util.Optional;
-
 import br.com.blendtecnologia.iam.core.domain.entities.User;
 import br.com.blendtecnologia.iam.core.domain.valueobjects.Identity;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface UserRepository {
 
-    List<User> getAll();
-    
     User save(User user);
+
+    void delete(User user);
 
     boolean existsByCpf(String cpf);
 
     Optional<User> findById(Identity id);
 
-    Optional<User> findByCpf(String cpf);
+    Optional<User> findByUsername(String username);
 
-    void delete(User user);
+    List<User> getAll();
+
 }

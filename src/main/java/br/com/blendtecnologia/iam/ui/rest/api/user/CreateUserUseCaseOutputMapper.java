@@ -1,13 +1,12 @@
 package br.com.blendtecnologia.iam.ui.rest.api.user;
 
-import java.net.URI;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import br.com.blendtecnologia.iam.core.domain.entities.User;
 import br.com.blendtecnologia.iam.ui.rest.api.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 public final class CreateUserUseCaseOutputMapper {
     
@@ -19,7 +18,7 @@ public final class CreateUserUseCaseOutputMapper {
         URI location = ServletUriComponentsBuilder
                 .fromContextPath(httpServletRequest)
                 .path("/user/{id}")
-                .buildAndExpand(user.getId().getNumber())
+                .buildAndExpand(user.getId().number())
                 .toUri();
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "Registered successfully"));

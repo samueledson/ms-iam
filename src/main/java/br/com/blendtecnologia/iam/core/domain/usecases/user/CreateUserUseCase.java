@@ -15,6 +15,7 @@ public class CreateUserUseCase implements UseCase<CreateUserUseCase.InputValues,
     
     @Override
     public OutputValues execute(InputValues input) {
+
         if(userRepository.existsByCpf(input.cpf())) {
             throw new CpfAlreadyUsedException("CPF already used");
         }
@@ -30,7 +31,8 @@ public class CreateUserUseCase implements UseCase<CreateUserUseCase.InputValues,
         return new OutputValues(userRepository.save(user));
     }
 
-    public record InputValues(String cpf, String email, String password, String name, String cellphone) implements UseCase.InputValues {}
+    public record InputValues(String cpf, String email, String password, String name, String cellphone)
+            implements UseCase.InputValues {}
 
     public record OutputValues(User user) implements UseCase.OutputValues {}
 }

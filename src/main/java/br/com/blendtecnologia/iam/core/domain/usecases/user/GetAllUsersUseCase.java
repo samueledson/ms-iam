@@ -1,12 +1,12 @@
 package br.com.blendtecnologia.iam.core.domain.usecases.user;
 
-import java.util.List;
-
 import br.com.blendtecnologia.iam.core.domain.entities.User;
 import br.com.blendtecnologia.iam.core.domain.repositories.UserRepository;
 import br.com.blendtecnologia.iam.core.domain.usecases.UseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor

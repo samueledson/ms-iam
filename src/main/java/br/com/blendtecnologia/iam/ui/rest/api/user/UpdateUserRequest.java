@@ -1,10 +1,9 @@
 package br.com.blendtecnologia.iam.ui.rest.api.user;
 
-import org.springframework.lang.Nullable;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Value;
+import org.springframework.lang.Nullable;
 
 @Value
 @AllArgsConstructor
@@ -12,18 +11,18 @@ import lombok.Value;
 public class UpdateUserRequest {
 
     @Nullable
-    private final String cpf;
+    String cpf;
 
     @Nullable
-    private final String email;
+    String email;
 
     @Nullable
-    private final String password;
+    String password;
 
     @Nullable
-    private final String name;
+    String name;
 
     @Nullable
-    private final String cellphone;
+    String cellphone;
 
 }

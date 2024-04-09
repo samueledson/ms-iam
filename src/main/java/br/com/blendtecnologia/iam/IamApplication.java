@@ -1,11 +1,13 @@
 package br.com.blendtecnologia.iam;
 
-import java.util.TimeZone;
-
+import jakarta.annotation.PostConstruct;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import jakarta.annotation.PostConstruct;
+import java.util.TimeZone;
 
 @SpringBootApplication
 public class IamApplication {
@@ -17,6 +19,13 @@ public class IamApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(IamApplication.class, args);
+    }
+
+    @Bean
+    ApplicationRunner runner(PasswordEncoder passwordEncoder) {
+        CharSequence rawPassword = "123456";
+        String encodedPassword = passwordEncoder.encode(rawPassword);
+        return args -> System.out.println(passwordEncoder.matches(rawPassword, encodedPassword));
     }
 
 }

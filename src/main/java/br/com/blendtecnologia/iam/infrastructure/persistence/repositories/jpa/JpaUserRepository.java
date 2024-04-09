@@ -1,15 +1,16 @@
 package br.com.blendtecnologia.iam.infrastructure.persistence.repositories.jpa;
 
-import java.util.Optional;
-
+import br.com.blendtecnologia.iam.infrastructure.persistence.entities.UserData;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.blendtecnologia.iam.infrastructure.persistence.entities.UserData;
+import java.util.Optional;
 
 public interface JpaUserRepository extends JpaRepository<UserData, Long> {
         
     boolean existsByCpf(String cpf);
 
     Optional<UserData> findByCpf(String cpf);
+
+    Optional<UserData> findByEmail(String email);
     
 }

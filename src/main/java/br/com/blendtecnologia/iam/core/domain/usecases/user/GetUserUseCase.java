@@ -8,6 +8,8 @@ import br.com.blendtecnologia.iam.core.domain.valueobjects.Identity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import static br.com.blendtecnologia.iam.infrastructure.persistence.utils.IdConverter.convertId;
+
 @Service
 @RequiredArgsConstructor
 public class GetUserUseCase implements UseCase<GetUserUseCase.InputValues, GetUserUseCase.OutputValues>{
@@ -16,11 +18,12 @@ public class GetUserUseCase implements UseCase<GetUserUseCase.InputValues, GetUs
 
     @Override
     public OutputValues execute(InputValues input) {
+
         final Identity id = input.id();
 
         return userRepository.findById(id)
             .map(OutputValues::new)
-            .orElseThrow(() -> new NotFoundException("User %s not found", id.getNumber()));
+            .orElseThrow(() -> new NotFoundException("User %s not found", convertId(id)));
     }
 
     public record InputValues(Identity id) implements UseCase.InputValues {}

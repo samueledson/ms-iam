@@ -1,36 +1,25 @@
 package br.com.blendtecnologia.iam.infrastructure.persistence.entities;
 
-import static br.com.blendtecnologia.iam.infrastructure.persistence.utils.IdConverter.convertId;
-
-import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import br.com.blendtecnologia.iam.core.domain.entities.User;
 import br.com.blendtecnologia.iam.core.domain.entities.UserStatus;
 import br.com.blendtecnologia.iam.core.domain.valueobjects.Identity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
+
+import java.time.LocalDateTime;
+
+import static br.com.blendtecnologia.iam.infrastructure.persistence.utils.IdConverter.convertId;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(of = "id")
-@ToString(of = {"status", "cpf", "email", "name", "cellphone", "createdAt", "updatedAt"})
+//@ToString(of = {"status", "cpf", "email", "name", "cellphone", "createdAt", "updatedAt"})
 @Entity(name = "user")
 @Table(name = "user")
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -99,18 +88,18 @@ public class UserData {
     }
 
     public User fromThis() {
-        return new User(
-            new Identity(id),
-            status,
-            cpf,
-            email,
-            password,
-            name,
-            cellphone,
-            createdAt,
-            updatedAt,
-            deletedAt
-        );
+        User user = new User();
+        user.setId(new Identity(id));
+        user.setStatus(status);
+        user.setCpf(cpf);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setName(name);
+        user.setCellphone(cellphone);
+        user.setCreatedAt(createdAt);
+        user.setUpdatedAt(updatedAt);
+        user.setDeletedAt(deletedAt);
+        return user;
     }
 
 }
