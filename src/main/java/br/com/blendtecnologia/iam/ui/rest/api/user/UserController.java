@@ -4,7 +4,6 @@ import br.com.blendtecnologia.iam.ui.rest.api.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,26 +14,26 @@ import java.util.concurrent.CompletableFuture;
 @RequestMapping("users")
 public interface UserController {
 
-    @GetMapping
-    @PreAuthorize("hasRole('MS_IAM_READ_USERS')")
-    CompletableFuture<List<UserResponse>> getAll();
-
     @PostMapping
-    @PreAuthorize("hasRole('MS_IAM')")
+    @PreAuthorize("hasAuthority('SCOPE_user:create')")
     CompletableFuture<ResponseEntity<ApiResponse>> create(HttpServletRequest httpServletRequest,
             @RequestBody @Valid UserRequest userRequest);
 
     @GetMapping("/{id}")
-    @Secured("MS_IAM_READ_USER")
+    @PreAuthorize("hasAuthority('SCOPE_user:read')")
     CompletableFuture<UserResponse> getById(@PathVariable Long id);
 
     @PatchMapping("/{id}")
-    @PreAuthorize("hasRole('MS_IAM')")
+    @PreAuthorize("hasAuthority('SCOPE_user:update')")
     CompletableFuture<UserResponse> update(HttpServletRequest httpServletRequest, @PathVariable Long id,
                                            @RequestBody @Valid UpdateUserRequest updateUserRequest);
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('MS_IAM')")
+    @PreAuthorize("hasAuthority('SCOPE_user:delete')")
     CompletableFuture<ResponseEntity<ApiResponse>> delete(@PathVariable Long id);
+
+    @GetMapping
+    @PreAuthorize("hasAuthority('SCOPE_users:list')")
+    CompletableFuture<List<UserResponse>> getAll();
 
 }

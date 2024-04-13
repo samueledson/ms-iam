@@ -4,8 +4,12 @@ import br.com.blendtecnologia.iam.core.domain.valueobjects.Identity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -22,9 +26,17 @@ public class User {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
+    private Set<Role> roles;
 
     public String getUsername() {
         return this.email != null ? this.email : this.cpf;
+    }
+
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.roles.stream()
+                .map(Role::getName)
+                .map(SimpleGrantedAuthority::new)
+                .toList();
     }
 
     public static User newInstance(String cpf, String email, String password, String name, String cellphone) {

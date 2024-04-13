@@ -25,7 +25,8 @@ public class IamApplication {
     ApplicationRunner runner(PasswordEncoder passwordEncoder) {
         CharSequence rawPassword = "123456";
         String encodedPassword = passwordEncoder.encode(rawPassword);
-        return args -> System.out.println(passwordEncoder.matches(rawPassword, encodedPassword));
+        //return args -> System.out.println(passwordEncoder.matches(rawPassword, encodedPassword));
+        return args -> System.out.println(encodedPassword);
     }
 
 }

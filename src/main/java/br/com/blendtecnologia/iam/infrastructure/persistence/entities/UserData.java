@@ -1,5 +1,6 @@
 package br.com.blendtecnologia.iam.infrastructure.persistence.entities;
 
+import br.com.blendtecnologia.iam.core.domain.entities.Role;
 import br.com.blendtecnologia.iam.core.domain.entities.User;
 import br.com.blendtecnologia.iam.core.domain.entities.UserStatus;
 import br.com.blendtecnologia.iam.core.domain.valueobjects.Identity;
@@ -12,6 +13,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static br.com.blendtecnologia.iam.infrastructure.persistence.utils.IdConverter.convertId;
 
@@ -19,9 +22,8 @@ import static br.com.blendtecnologia.iam.infrastructure.persistence.utils.IdConv
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(of = "id")
-//@ToString(of = {"status", "cpf", "email", "name", "cellphone", "createdAt", "updatedAt"})
-@Entity(name = "user")
-@Table(name = "user")
+@Entity(name = "users")
+@Table(name = "users")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserData {
     
@@ -62,6 +64,14 @@ public class UserData {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime deletedAt;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    public Set<RoleData> roles;
+
     @PrePersist
     public void onCreate() {
         createdAt = LocalDateTime.now();
@@ -73,18 +83,21 @@ public class UserData {
     }
 
     public static UserData from(User user) {
-        return new UserData(
-            convertId(user.getId()),
-            user.getStatus(),
-            user.getCpf(),
-            user.getEmail(),
-            user.getPassword(),
-            user.getName(),
-            user.getCellphone(),
-            user.getCreatedAt(),
-            user.getUpdatedAt(),
-            user.getDeletedAt()
-        );
+        UserData userData = new UserData();
+        userData.setId(convertId(user.getId()));
+        userData.setStatus(user.getStatus());
+        userData.setCpf(user.getCpf());
+        userData.setEmail(user.getEmail());
+        userData.setPassword(user.getPassword());
+        userData.setName(user.getName());
+        userData.setCellphone(user.getCellphone());
+        userData.setCreatedAt(user.getCreatedAt());
+        userData.setUpdatedAt(user.getUpdatedAt());
+        userData.setDeletedAt(user.getDeletedAt());
+        if (user.getRoles() != null) {
+            userData.setRoles(user.getRoles().stream().map(RoleData::from).collect(Collectors.toSet()));
+        }
+        return userData;
     }
 
     public User fromThis() {
@@ -99,6 +112,7 @@ public class UserData {
         user.setCreatedAt(createdAt);
         user.setUpdatedAt(updatedAt);
         user.setDeletedAt(deletedAt);
+        user.setRoles(roles.stream().map(RoleData::fromThis).collect(Collectors.toSet()));
         return user;
     }
 
