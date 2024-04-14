@@ -112,7 +112,9 @@ public class UserData {
         user.setCreatedAt(createdAt);
         user.setUpdatedAt(updatedAt);
         user.setDeletedAt(deletedAt);
-        user.setRoles(roles.stream().map(RoleData::fromThis).collect(Collectors.toSet()));
+        if (roles != null) {
+            user.setRoles(roles.stream().map(RoleData::fromThis).collect(Collectors.toSet()));
+        }
         return user;
     }
 

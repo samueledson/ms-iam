@@ -39,14 +39,4 @@ public class User {
                 .toList();
     }
 
-    public static User newInstance(String cpf, String email, String password, String name, String cellphone) {
-        User user = new User();
-        user.setCpf(cpf);
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setName(name);
-        user.setCellphone(cellphone);
-        return user;
-    }
-
 }

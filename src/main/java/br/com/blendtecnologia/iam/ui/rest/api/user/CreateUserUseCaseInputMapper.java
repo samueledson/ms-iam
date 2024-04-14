@@ -19,7 +19,8 @@ public final class CreateUserUseCaseInputMapper {
                 userRequest.getEmail(),
                 passwordEncoder.encode(userRequest.getPassword()),
                 userRequest.getName(),
-                userRequest.getCellphone()
+                userRequest.getCellphone(),
+                userRequest.getStatus()
         );
     }
 
